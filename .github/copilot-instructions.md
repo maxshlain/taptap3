@@ -1,94 +1,88 @@
-# GitHub Copilot Instructions for TapTap3
+# GitHub Copilot Instructions - Python Best Practices
 
-## Project Overview
-TapTap3 is a Python macOS app that fixes multilingual typing. Double-tap Caps Lock to retroactively correct text by switching languages and re-typing with proper character mapping.
-
-## Core Functionality
-- **Double Caps Lock Detection**: 500ms window
-- **Character Buffer**: Tracks characters since last space
-- **Language Switching**: Cycles en ↔ ru
-- **Keyboard Simulation**: Delete + retype with correct mapping
+Follow these guidelines when generating Python code for modern software development with Python.
 
 ## Project Structure
-```
-src/
-  main.py              # Entry point
-  keyboard_handler.py  # Input handling & simulation
-  language_switcher.py # Language management
-tests/
-  test_*.py           # Unit tests
-```
+When creating or organizing Python projects:
+- Use src-layout with `src/your_package_name/` structure
+- Place tests in `tests/` directory parallel to `src/`
+- Keep configuration in `config/` or use environment variables
+- Store requirements in `requirements.txt` or `pyproject.toml`
 
-## Technology Stack
-- **Python 3.8+** with **pynput** for keyboard I/O
-- **pytest** for testing
-- **macOS** target (requires Accessibility permissions)
+## Code Style and Formatting
+Always generate code that follows these standards:
+- Apply Black code formatting standards
+- Use isort conventions for import sorting
+- Follow PEP 8 naming conventions:
+  - `snake_case` for functions and variables
+  - `PascalCase` for classes
+  - `UPPER_CASE` for constants
+- Keep maximum line length at 88 characters (Black default)
+- Prefer absolute imports over relative imports
 
-## Code Guidelines
+## Type Hints
+Include comprehensive type hints in all generated code:
+- Add type hints for all function parameters and return values
+- Import types from `typing` module when needed
+- Use `Optional[Type]` instead of `Type | None` for compatibility
+- Use `TypeVar` for generic types
+- Suggest custom types in `types.py` for complex type definitions
+- Use `Protocol` for duck typing interfaces
 
-### Style
-- PEP 8, type hints, 88 char lines
-- Use `@dataclass` for data containers
-- Descriptive names, proper exception handling
+## Testing Code
+Generate comprehensive test suites:
+- Use pytest as the testing framework
+- Write tests for all application routes
+- Include pytest-cov for coverage reporting
+- Create reusable pytest fixtures
+- Use pytest-mock for proper mocking
+- Test error scenarios and edge cases
 
-### Key Patterns
-```python
-from dataclasses import dataclass
-from typing import List, Optional
+## Error Handling
+Create robust error handling:
+- Define custom exception classes for specific errors
+- Use appropriate try-except block structures
+- Implement comprehensive logging for debugging
+- Return user-friendly error responses
+- Handle edge cases gracefully
+- Provide meaningful error messages
 
-@dataclass
-class KeyboardEvent:
-    key: str
-    timestamp: float
-    is_press: bool
+## Documentation Standards
+Include proper documentation:
+- Use Google-style docstrings for all functions and classes
+- Document all public APIs comprehensively
+- Generate inline comments for complex logic
+- Create clear function and class descriptions
+- Document environment setup requirements
 
-class KeyboardHandler:
-    def __init__(self, detection_window: float = 0.5):
-        self.detection_window = detection_window
-        self.character_buffer: List[str] = []
-        self.caps_lock_presses: List[float] = []
-```
+## Development Environment
+When suggesting development setup:
+- Use virtual environments (venv) for isolation
+- Configure pre-commit hooks for code quality
+- Follow Git workflow best practices
+- Implement semantic versioning
+- Set up proper CI/CD pipelines
+- Configure appropriate logging levels
 
-### Testing
-Always mock `pynput`:
-```python
-@patch('pynput.keyboard.Controller')
-@patch('pynput.keyboard.Listener')
-def test_keyboard_handler(mock_listener, mock_controller):
-    # Test implementation
-```
+## Dependency Management
+Handle dependencies properly:
+- Pin specific dependency versions in requirements
+- Separate production and development dependencies
+- Use appropriate package version constraints
+- Suggest regular dependency updates
+- Include security vulnerability checks
 
-## Core Implementation
+## Code Generation Guidelines
+When generating Python code:
+1. Always include appropriate imports at the top
+2. Add comprehensive docstrings and comments
+3. Include error handling and validation
+4. Use type hints consistently
+5. Follow the established project structure
+6. Implement security best practices by default
+7. Generate tests alongside main code when appropriate
+8. Include logging statements for debugging
+9. Use environment variables for configuration
+10. Follow the DRY (Don't Repeat Yourself) principle
 
-### Timing
-- 500ms double Caps Lock window
-- Buffer clears on space
-- Reset after successful detection
-
-### Character Mapping
-```python
-QWERTY_TO_CYRILLIC = {
-    'q': 'й', 'w': 'ц', 'e': 'у', 'r': 'к', 't': 'е',
-    # ... complete mapping
-}
-```
-
-### Error Handling
-```python
-try:
-    # Keyboard operations
-except Exception as e:
-    logger.error(f"Operation failed: {e}")
-    # Graceful degradation
-```
-
-## Development Priorities
-1. **MVP**: Double Caps Lock detection, buffer management, basic switching
-2. **Next**: Character mapping, system language detection, config
-3. **Future**: Multi-language support, smart detection, menu bar
-
-## Key Requirements
-- Accessibility permissions for global keyboard monitoring
-- Lightweight event handlers for performance
-- Privacy-aware logging (no sensitive content)
-- Background service capability
+Remember to adapt these guidelines based on the specific project context and requirements while maintaining consistency with these established patterns.
