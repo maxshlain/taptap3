@@ -1,10 +1,10 @@
-# TapTap2
+# TapTap3
 
 > A Python desktop application for macOS that solves multilingual typing problems with intelligent keyboard layout switching.
 
 ## Overview
 
-TapTap2 eliminates the hassle of manually switching keyboard layouts when typing in multiple languages. Simply continue typing and double-tap the Caps Lock key to retroactively correct text typed in the wrong language.
+TapTap eliminates the hassle of manually switching keyboard layouts when typing in multiple languages. Simply continue typing and double-tap the Caps Lock key to retroactively correct text typed in the wrong language.
 
 ### How It Works
 
@@ -14,7 +14,7 @@ User double-taps Caps Lock
 Result: "In russian, word hello is "Прив"
 ```
 
-When you double-tap Caps Lock, TapTap2:
+When you double-tap Caps Lock, taptap:
 1. Deletes all characters typed since the last space
 2. Switches to the next available keyboard language
 3. Re-types the characters using the correct language mapping
@@ -69,8 +69,8 @@ pip install -e .
 # Activate virtual environment
 source venv/bin/activate
 
-# Start TapTap2
-python -m src.taptap2.main
+# Start taptap3
+python -m src.taptap3.main
 ```
 
 ### Basic Usage
