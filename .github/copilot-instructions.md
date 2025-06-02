@@ -14,12 +14,11 @@ TapTap3 is a Python desktop application for macOS that solves multilingual typin
 ## Project Structure
 
 ```
-src/
-  taptap3/
-    __init__.py
-    main.py              # Application entry point
-    keyboard_handler.py  # Input handling and simulation
-    language_switcher.py # Language management
+src/  
+  __init__.py
+  main.py              # Application entry point
+  keyboard_handler.py  # Input handling and simulation
+  language_switcher.py # Language management
 tests/
   test_keyboard_handler.py
   test_language_switcher.py
